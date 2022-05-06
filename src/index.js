@@ -16,13 +16,13 @@ const PORT = process.env.PORT || 3000;
 app.get("/", (req, res) => {
   Product.create({
     name: "PC GAMER",
-  }).then((product) => {
-    res.json(product);
+  }).then((Product) => {
+    res.json(Product);
   });
 });
 
 //Arrancamos el servidor
-app.listen(PORT, function () {
+app.listen(PORT, () => {
   console.log(`la app ha arranado en http://${PORT}`);
 
   //conectase a la base de datos
@@ -30,9 +30,9 @@ app.listen(PORT, function () {
   sequelize
     .sync({ force: false })
     .then(() => {
-      console.log("nos hemos conectados a la base de datos");
+      console.log("nos hemos conectados a la base de datos :D");
     })
-    .catch((error) => {
-      console.log("se ha producido un error", error);
+    .catch((Error) => {
+      console.log("se ha producido un error unu", Error);
     });
 });
