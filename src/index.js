@@ -13,13 +13,6 @@ const Product = require("./models/products");
 const PORT = process.env.PORT || 3000;
 
 //rutas
-app.get("/", (req, res) => {
-  Product.create({
-    name: "PC GAMER",
-  }).then((Product) => {
-    res.json(Product);
-  });
-});
 
 //Arrancamos el servidor
 app.listen(PORT, () => {

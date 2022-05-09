@@ -1,8 +1,12 @@
+const { config } = require("dotenvs");
+
+config();
+
 module.exports = {
-  database: {
-    username: "postgres",
-    password: "123456",
-    database: "sequelize",
-    host: "localhost",
+  db: {
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
   },
 };
