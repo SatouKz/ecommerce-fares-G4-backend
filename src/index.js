@@ -1,31 +1,37 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-const sequelize = require("./database/db");
-const Product = require("./models/products");
+app.use(morgan("dev"));
 
-// app.use(morgan("dev"));
+const express = require("express");
+const morgan = require("morgan");
+require("dotenv").config();
 
-// app.listen(3000);
-// console.log("server on port 3000");
+const categoryRoutes = require("./src/routes/category.routes");
+const productRoutes = require("./src/routes/products.routes");
 
-//Setting
-const PORT = process.env.PORT || 3000;
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan("dev"));
 
-//rutas
+app.use(categoryRoutes);
+app.use(productRoutes);
 
-//Arrancamos el servidor
-app.listen(PORT, () => {
-  console.log(`la app ha arranado en http://${PORT}`);
+app.listen(3000, () => console.log("Server corriendo"));
 
-  //conectase a la base de datos
-  //Force true : DROP TABLES
-  sequelize
-    .sync({ force: false })
-    .then(() => {
-      console.log("nos hemos conectados a la base de datos :D");
-    })
-    .catch((Error) => {
-      console.log("se ha producido un error unu", Error);
-    });
-});
+// Tutorial del video
+
+// //Arrancamos el servidor
+// app.listen(PORT, () => {
+//   console.log(`la app ha arranado en http://${PORT}`);
+
+//   //conectase a la base de datos
+//   //Force true : DROP TABLES
+//   sequelize
+//     .sync({ force: false })
+//     .then(() => {
+//       console.log("nos hemos conectados a la base de datos :D");
+//     })
+//     .catch((Error) => {
+//       console.log("se ha producido un error unu", Error);
+//     });
+// });
