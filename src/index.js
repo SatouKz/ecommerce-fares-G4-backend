@@ -1,37 +1,38 @@
 const express = require("express");
 const morgan = require("morgan");
-const app = express();
-app.use(morgan("dev"));
-
-const express = require("express");
-const morgan = require("morgan");
 require("dotenv").config();
 
-const categoryRoutes = require("./src/routes/category.routes");
-const productRoutes = require("./src/routes/products.routes");
+// This will be our application entry. We'll setup our server here.
+const http = require("http");
 
-app.use(express.urlencoded({ extended: false }));
+// Set up the express app
+const app = express();
+
+// Log requests to the console.
 app.use(morgan("dev"));
 
-app.use(categoryRoutes);
-app.use(productRoutes);
+// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.get("*", (req, res) =>
+  res.status(200).send({
+    message: "Welcome bro uwu jsndjsbdj.",
+  })
+);
 
-app.listen(3000, () => console.log("Server corriendo"));
+//rutas
 
-// Tutorial del video
+// app.use(categoryRoutes);
+// app.use(productRoutes);
 
-// //Arrancamos el servidor
-// app.listen(PORT, () => {
-//   console.log(`la app ha arranado en http://${PORT}`);
+// const categoryRoutes = require("./src/routes/category.routes");
+// const productRoutes = require("./src/routes/products.routes");
 
-//   //conectase a la base de datos
-//   //Force true : DROP TABLES
-//   sequelize
-//     .sync({ force: false })
-//     .then(() => {
-//       console.log("nos hemos conectados a la base de datos :D");
-//     })
-//     .catch((Error) => {
-//       console.log("se ha producido un error unu", Error);
-//     });
-// });
+// app.use(express.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const port = parseInt(process.env.PORT, 10) || 8000;
+app.set("port", port);
+const server = http.createServer(app);
+server.listen(port);
+module.exports = app;

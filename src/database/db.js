@@ -1,12 +1,18 @@
-const { Pool } = require("pg");
-const { db } = require("../config/config");
+const { Sequelize } = require("sequelize");
+const pg = require("pg");
 
-const pool = new Pool({
-  user: db.user,
-  password: db.password,
-  host: db.host,
-  port: db.port,
-  database: db.database,
+const sequelize = new Sequelize(process.env.DB, {
+  dialectModule: pg,
 });
+const main = async () => {
+  try {
+    await sequelize.sync({ force: false });
+    await sequelize.authenticate();
+    console.log("Conexion establecida");
+  } catch (error) {
+    console.log(error);
+  }
+};
+main();
 
-module.exports = pool;
+module.exports = sequelize;

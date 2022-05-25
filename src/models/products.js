@@ -1,6 +1,5 @@
 const sequelize = require("../database/db");
 const { DataTypes } = require("sequelize");
-
 const Product = sequelize.define("product", {
   id: {
     type: DataTypes.INTEGER,
@@ -23,21 +22,6 @@ const Product = sequelize.define("product", {
     type: DataTypes.INTEGER,
   },
 });
-
 module.exports = {
   Product,
 };
-
-//ejemplo de un video
-
-// class Product extends Model {}
-// Product.init(
-//   {
-//     name: DataTypes.STRING,
-//     allowNull: false,
-//   },
-//   {
-//     sequelize,
-//     modelName: "product",
-//   }
-// );
